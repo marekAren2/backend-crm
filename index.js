@@ -1,3 +1,5 @@
+const config = require('./config'); 
+
 const express = require('express'); 
 // const app = express.express();
 const app = express();
@@ -14,7 +16,8 @@ app.get('/',(req,res) => {
 
 
 // app.listen('3005');
-app.listen(3005,() => {
+// app.listen(3005,() => {
+app.listen(config.app.port, () => {
     console.log('serwer Node działa - listen')
     
 });
