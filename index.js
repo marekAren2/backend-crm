@@ -3,6 +3,11 @@ const config = require('./config');
 const express = require('express'); 
 // const app = express.express();
 const app = express();
+
+const mongoose = require('mongoose'); 
+
+
+
 const cors = require('cors'); 
 
 app.use(cors())
