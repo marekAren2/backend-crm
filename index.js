@@ -65,14 +65,19 @@ app.get('/',(req,res) => {
     // res.send(req);
 });
 
-app.get('/clients',(req,res) => {
+// do routingu nie podajemy jako 2-gi parametr funkcji zwrotnej cb!!!
+// app.get('/clients',(req,res) => {
+app.get('/clients', clientController.index);
   // console.log('req,res',req,res);
   // res.send('Hello');
-res.send(clientController.index())
+// nie wysylamy wartosci index obiektu clientController!!!
+  // res.send(clientController.index)
+// nie wysylamy metody/funkcji obiektu   clientController!!!
+  // res.send(clientController.index())
 // no lean here ,but in controller :res.send(clientController.index().lean())
   // res.send(req);
 
-});
+
 
 
 

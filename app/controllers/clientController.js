@@ -5,14 +5,17 @@ module.exports = {
     index: (req, res) => {
         console.log('Przed zapytaniem do bazy danych');
 
-        Client.find({}).lean()
+        // Client.findOne({age: 1})
+        // Client.findOne({age: '1'})
+        // Client.find({}).lean()
+        Client.find()
             .then((result) => {
                 // Jeśli sukces
-                console.log('Po zapytaniu do bazy danych. Wyniki:', result);
+                console.log('L:11 Po zapytaniu do bazy danych. Wyniki:', result);
                 if (res) {
                     res.send(result);
                 } else {
-                    console.error('Obiekt res jest niezdefiniowany.');
+                    console.error('L:15 Obiekt res jest niezdefiniowany.');
                 }
             })
             .catch((err) => {
@@ -46,7 +49,7 @@ module.exports = {
     }, */
 
     create: (req,res) => {
-        console.log('req,res',req,res)
+        // console.log('req,res',req,res)
 
         const clientNew = new Client({name: 'New tech sa', address: {street: 'piotrkowska', city: 'gliwice'},nip: 6791151212, yearOf: 10});
 
