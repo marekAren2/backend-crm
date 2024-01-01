@@ -60,8 +60,19 @@ app.use(cors())
 app.get('/',(req,res) => {
     // console.log('req,res',req,res);
     res.send('Hello');
+// res.send(clientController.index())
+// res.send(clientController.index)
     // res.send(req);
-})
+});
+
+app.get('/clients',(req,res) => {
+  // console.log('req,res',req,res);
+  // res.send('Hello');
+res.send(clientController.index())
+// no lean here ,but in controller :res.send(clientController.index().lean())
+  // res.send(req);
+
+});
 
 
 
