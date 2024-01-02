@@ -56,7 +56,8 @@ main().catch((err) => console.error(err));
 
 const cors = require('cors'); 
 
-app.use(cors())
+app.use(cors());
+app.use(express.json());
 app.get('/',(req,res) => {
     // console.log('req,res',req,res);
     res.send('Hello');
@@ -65,9 +66,21 @@ app.get('/',(req,res) => {
     // res.send(req);
 });
 
-// do routingu nie podajemy jako 2-gi parametr funkcji zwrotnej cb!!!
+// do routing nie podajemy jako 2-gi parametr funkcji zwrotnej cb!!!
 // app.get('/clients',(req,res) => {
 app.get('/clients', clientController.index);
+/* Routes do zrobienia - potrzebne? */
+/* app.get('/clients/:id', clientController.index);
+app.post('/clients/add', clientController.create);
+app.delete('/clients/delete/:id', clientController.delete);
+// czy?
+app.delete('/:id', clientController.delete);
+app.post('/clients', clientController.create);
+app.get('/:id', clientController.index); */
+
+app.post('/clients', clientController.create);
+app.put('/clients/:id', clientController.update);
+
   // console.log('req,res',req,res);
   // res.send('Hello');
 // nie wysylamy wartosci index obiektu clientController!!!
