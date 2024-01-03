@@ -80,6 +80,9 @@ app.get('/:id', clientController.index); */
 
 app.post('/clients', clientController.create);
 app.put('/clients/:id', clientController.update);
+// app.delete('/:id', clientController.delete);
+// czy ?:
+app.delete('clients/:id', clientController.delete);
 
   // console.log('req,res',req,res);
   // res.send('Hello');

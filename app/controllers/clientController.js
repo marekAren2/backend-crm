@@ -62,7 +62,9 @@ module.exports = {
         // const clientNew = new Client(req.parameters.id, req.body);
         // const clientNew = new Client(req.params.id, req.body);
         // const clientNew = new Client(...req.body);
+        
         // const clientNew = new Client({...req.body});
+
         // const clientNew = new Client({req.body});
         
         const clientNew = new Client(req.body);
@@ -99,6 +101,22 @@ module.exports = {
             // console.warn(err);
             // res.send(err);
             res.status(500).json({ error: 'Nieprawidłowe dane JSON w body', blad: err  });
+        });
+        
+    },
+
+    delete: (req,res) => {
+        // console.log('req,res',req,res)
+        Client.findByIdAndDelete(req.params.id)
+        .then((result) => {
+            // jeśli sukces
+            res.send(result);
+        })
+        .catch((err) => {
+            /// obsługa błędów za pomocą funkcji anonimowej (err to parameter funkcji)
+            console.warn(err);
+            // res.send(err);
+            res.status(500).json({ error: 'Nieprawidłowe dane JSON w body', blad: err });
         });
         
     }
