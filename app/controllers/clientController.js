@@ -63,11 +63,11 @@ module.exports = {
         // const clientNew = new Client(req.params.id, req.body);
         // const clientNew = new Client(...req.body);
         
-        // const clientNew = new Client({...req.body});
+        const clientNew = new Client({...req.body});
 
         // const clientNew = new Client({req.body});
         
-        const clientNew = new Client(req.body);
+        // const clientNew = new Client(req.body);
         
 
         
@@ -89,8 +89,10 @@ module.exports = {
     update: (req,res) => {
         console.log('req.params.id',req.params.id)
         
-        Client.findByIdAndUpdate(req.params.id,{updated: Date().toString()})
+        // Client.findByIdAndUpdate(req.params.id,{updated: Date().toString()})
+        // dla odsyłania aktualnego pola nie sprzed aktualizacji , {new: true})
         // Client.findByIdAndUpdate(req.params.id, req.body)
+        Client.findByIdAndUpdate(req.params.id, req.body, {new: true})
         .then((result) => {
             // jeśli sukces
             // res.send(result);
@@ -110,7 +112,9 @@ module.exports = {
         Client.findByIdAndDelete(req.params.id)
         .then((result) => {
             // jeśli sukces
-            res.send(result);
+            // res.send(result);
+            // res.status(500).json({ message: 'usuniete', record: result });
+            res.json({ message: 'usuniete', record: result });
         })
         .catch((err) => {
             /// obsługa błędów za pomocą funkcji anonimowej (err to parameter funkcji)

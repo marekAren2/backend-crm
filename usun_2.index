@@ -1,0 +1,75 @@
+Aby przekształcić dane z pliku XML na czytelną tabelę w języku JavaScript, możesz użyć HTML do utworzenia tabeli i JavaScript do analizy i wypełniania danych z pliku XML. Poniżej znajduje się przykładowy kod, który może ci pomóc:
+
+``html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML to Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<table id="xmlTable"></table>
+
+<script>
+    // Funkcja do wczytywania pliku XML asynchronicznie
+    function loadXMLDoc(filename, callback) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                callback(this.responseXML);
+            }
+        };
+        xhttp.open("GET", filename, true);
+        xhttp.send();
+    }
+
+    // Funkcja do przetwarzania pliku XML na tabelę
+    function processXML(xml) {
+        var table = document.getElementById("xmlTable");
+
+        // Pobierz wszystkie węzły <row> z pliku XML
+        var rows = xml.getElementsByTagName("row");
+
+        // Utwórz nagłówki tabeli na podstawie pierwszego wiersza danych
+        var headerRow = table.createTHead().insertRow(0);
+        for (var j = 0; j < rows[0].children.length; j++) {
+            var cell = headerRow.insertCell(j);
+            cell.textContent = rows[0].children[j].tagName;
+        }
+
+        // Utwórz wiersze tabeli i wypełnij je danymi z pliku XML
+        for (var i = 0; i < rows.length; i++) {
+            var row = table.insertRow(i + 1);
+            for (var j = 0; j < rows[i].children.length; j++) {
+                var cell = row.insertCell(j);
+                cell.textContent = rows[i].children[j].textContent;
+            }
+        }
+    }
+
+    // Wywołaj funkcję wczytywania pliku XML
+    loadXMLDoc("sciezka/do/pliku.xml", processXML);
+</script>
+
+</body>
+</html>
+```
+
+Ten kod tworzy tabelę HTML z danymi z pliku XML. Utworzone nagłówki tabeli odpowiadają nazwom tagów w pierwszym wierszu pliku XML, a dane są wypełniane w kolejnych wierszach. Pamiętaj, że musisz podać właściwą ścieżkę do swojego pliku XML w miejscu "sciezka/do/pliku.xml".
