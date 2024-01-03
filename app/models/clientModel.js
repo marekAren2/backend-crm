@@ -28,6 +28,7 @@ const Client = new mongoose.Schema(
       max: [6799999999, "zla wartosc"],
       
     },
+    // data default: ma byc funkcja? info  z gpt
     updated: { type: Date, default: Date.now() },
     // _someId: Schema.Types.ObjectId,
     // age: { type: Number, min: 18, max: 65},
